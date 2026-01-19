@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="经典贪吃蛇游戏，支持难度选择、暂停、最高分记录">
+    <title>🐍 贪吃蛇游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 游戏主容器 -->
+    <div class="game-container">
+        <!-- 游戏标题 -->
+        <h1>🐍 贪吃蛇游戏</h1>
+        
+        <!-- 难度选择器 -->
+        <div class="difficulty-selector">
+            <button class="difficulty-btn active" data-difficulty="easy">简单</button>
+            <button class="difficulty-btn" data-difficulty="medium">中等</button>
+            <button class="difficulty-btn" data-difficulty="hard">困难</button>
+        </div>
+        
+        <!-- 分数显示板 -->
+        <div class="score-board">
+            <div class="score">
+                <span class="score-label">当前分数</span>
+                <span id="current-score" class="score-value">0</span>
+            </div>
+            <div class="score">
+                <span class="score-label">最高分</span>
+                <span id="high-score" class="score-value">0</span>
+            </div>
+        </div>
+        
+        <!-- 游戏画布容器 -->
+        <div class="canvas-container">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            
+            <!-- 游戏状态覆盖层 -->
+            <div id="game-overlay" class="overlay">
+                <div class="overlay-content">
+                    <h2 id="overlay-title">准备开始</h2>
+                    <p id="overlay-message">按空格键或点击开始按钮</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 游戏控制按钮 -->
+        <div class="controls">
+            <button id="start-btn" class="control-btn start-btn">开始游戏</button>
+            <button id="pause-btn" class="control-btn pause-btn" disabled>暂停</button>
+            <button id="restart-btn" class="control-btn restart-btn">重新开始</button>
+        </div>
+        
+        <!-- 操作说明 -->
+        <div class="instructions">
+            <h3>📖 操作说明</h3>
+            <ul>
+                <li><strong>方向键 / WASD</strong> - 控制蛇的移动方向</li>
+                <li><strong>空格键</strong> - 开始/暂停/继续游戏</li>
+                <li><strong>避免撞墙</strong> - 碰到边界会导致游戏结束</li>
+                <li><strong>避免撞到自己</strong> - 蛇头碰到身体会游戏结束</li>
+                <li><strong>吃食物</strong> - 每吃一个食物得10分并增长</li>
+            </ul>
+        </div>
+        
+        <!-- 版权信息 -->
+        <div class="footer">
+            <p>经典贪吃蛇游戏 | 使用纯HTML + CSS + JavaScript开发</p>
+        </div>
+    </div>
+    
+    <!-- 引入游戏逻辑脚本 -->
+    <script src="game.js"></script>
+</body>
+</html>
