@@ -1,0 +1,416 @@
+/* ========================================
+   全局样式
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   游戏容器
+   ======================================== */
+.game-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 500px;
+    width: 100%;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   标题样式
+   ======================================== */
+h1 {
+    text-align: center;
+    color: #00ff41;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5),
+                 0 0 20px rgba(0, 255, 65, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(0, 255, 65, 0.5),
+                     0 0 20px rgba(0, 255, 65, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(0, 255, 65, 0.8),
+                     0 0 30px rgba(0, 255, 65, 0.5);
+    }
+}
+
+/* ========================================
+   难度选择器
+   ======================================== */
+.difficulty-selector {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.difficulty-btn {
+    padding: 10px 20px;
+    background: rgba(15, 52, 96, 0.6);
+    border: 2px solid #0f3460;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: inherit;
+}
+
+.difficulty-btn:hover {
+    background: rgba(15, 52, 96, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 52, 96, 0.4);
+}
+
+.difficulty-btn.active {
+    background: #0f3460;
+    border-color: #00ff41;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+    color: #00ff41;
+}
+
+.difficulty-btn:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   分数显示板
+   ======================================== */
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.score {
+    text-align: center;
+    flex: 1;
+}
+
+.score-label {
+    display: block;
+    font-size: 0.9em;
+    color: #a0a0a0;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.score-value {
+    display: block;
+    font-size: 2em;
+    color: #00ff41;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+/* ========================================
+   画布容器
+   ======================================== */
+.canvas-container {
+    position: relative;
+    margin: 0 auto 20px;
+    width: 400px;
+    height: 400px;
+}
+
+#gameCanvas {
+    border: 3px solid #0f3460;
+    border-radius: 10px;
+    background: #1a1a2e;
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2),
+                inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   游戏覆盖层
+   ======================================== */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 20px;
+}
+
+#overlay-title {
+    font-size: 2.2em;
+    color: #00ff41;
+    margin-bottom: 15px;
+    text-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+}
+
+#overlay-message {
+    font-size: 1.1em;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* ========================================
+   控制按钮
+   ======================================== */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    padding: 12px 24px;
+    border: none;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    flex: 1;
+    max-width: 150px;
+}
+
+.start-btn {
+    background: linear-gradient(135deg, #00cc33 0%, #00ff41 100%);
+    box-shadow: 0 4px 15px rgba(0, 255, 65, 0.3);
+}
+
+.start-btn:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(0, 255, 65, 0.5);
+    transform: translateY(-2px);
+}
+
+.pause-btn {
+    background: linear-gradient(135deg, #0f3460 0%, #1a5490 100%);
+    box-shadow: 0 4px 15px rgba(15, 52, 96, 0.3);
+}
+
+.pause-btn:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(15, 52, 96, 0.5);
+    transform: translateY(-2px);
+}
+
+.restart-btn {
+    background: linear-gradient(135deg, #e94560 0%, #ff6b82 100%);
+    box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+}
+
+.restart-btn:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(233, 69, 96, 0.5);
+    transform: translateY(-2px);
+}
+
+.control-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+}
+
+/* ========================================
+   操作说明
+   ======================================== */
+.instructions {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 15px;
+}
+
+.instructions h3 {
+    color: #00ff41;
+    margin-bottom: 12px;
+    font-size: 1.2em;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.instructions ul {
+    list-style: none;
+}
+
+.instructions li {
+    padding: 8px 0;
+    color: #d0d0d0;
+    line-height: 1.5;
+}
+
+.instructions li::before {
+    content: '▸ ';
+    color: #00ff41;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.instructions strong {
+    color: #00ff41;
+    font-weight: 600;
+}
+
+/* ========================================
+   版权信息
+   ======================================== */
+.footer {
+    text-align: center;
+    padding: 10px 0 0;
+    color: #888;
+    font-size: 0.85em;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 500px) {
+    .game-container {
+        padding: 20px 15px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    .canvas-container {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .difficulty-selector {
+        flex-wrap: wrap;
+    }
+    
+    .difficulty-btn {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+    
+    .score-board {
+        padding: 12px;
+    }
+    
+    .score-label {
+        font-size: 0.8em;
+    }
+    
+    .score-value {
+        font-size: 1.5em;
+    }
+    
+    .controls {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .control-btn {
+        flex: 1 1 calc(50% - 4px);
+        max-width: none;
+        font-size: 13px;
+        padding: 10px 16px;
+    }
+    
+    #overlay-title {
+        font-size: 1.8em;
+    }
+    
+    #overlay-message {
+        font-size: 1em;
+    }
+    
+    .instructions {
+        padding: 15px;
+    }
+    
+    .instructions li {
+        font-size: 0.9em;
+        padding: 6px 0;
+    }
+}
+
+/* ========================================
+   打印样式(禁用)
+   ======================================== */
+@media print {
+    body {
+        display: none;
+    }
+}
+
+/* ========================================
+   动画优化(减少动画用户偏好)
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
